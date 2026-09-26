@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farhan & Nawa — Undangan Pernikahan</title>
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Amiri:wght@400;700&family=Cinzel:wght@400;600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="locked">
+
+    <!-- CANVASES FOR PARTICLES & PETALS -->
+    <canvas id="petalCanvas"></canvas>
+
+    <!-- =========================================
+         OPENING COVER SCREEN
+    ========================================== -->
+    <div class="opening" id="opening">
+        <div class="opening-bg"></div>
+
+        <!-- Golden Decorative Arch Frame -->
+        <div class="arch-frame-container">
+            <div class="arch-frame">
+                <div class="arch-inner-border"></div>
+            </div>
+        </div>
+
+        <div class="opening-content">
+            <p class="eyebrow-script">The Wedding Of</p>
+
+            <h1 class="couple-title">
+                <span>Farhan</span>
+                <span class="ampersand">&</span>
+                <span>Nawa</span>
+            </h1>
+
+            <!-- Intricate SVG Logo Crest -->
+            <div class="svg-crest-logo">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Outer Decorative Border -->
+                    <path d="M 50 2 L 95 25 L 95 75 L 50 98 L 5 75 L 5 25 Z" fill="none" stroke="url(#goldGrad)" stroke-width="2"/>
+                    <path d="M 50 8 L 88 28 L 88 72 L 50 92 L 12 72 L 12 28 Z" fill="none" stroke="url(#goldGrad)" stroke-width="0.5"/>
+                    <!-- Ornate Flourishes -->
+                    <path d="M 50 15 C 65 15, 75 30, 75 50 C 75 70, 65 85, 50 85 C 35 85, 25 70, 25 50 C 25 30, 35 15, 50 15 Z" fill="none" stroke="url(#goldGrad)" stroke-width="1" stroke-dasharray="2 2"/>
+                    <!-- Interlocking F & N -->
+                    <text x="38" y="62" font-family="'Cinzel', serif" font-size="34" font-weight="bold" fill="url(#goldGrad)" text-anchor="middle">F</text>
+                    <text x="62" y="62" font-family="'Cinzel', serif" font-size="34" font-weight="bold" fill="url(#goldGrad)" text-anchor="middle">N</text>
+                    <!-- Small star/diamond -->
+                    <polygon points="50,22 52,28 58,30 52,32 50,38 48,32 42,30 48,28" fill="url(#goldGrad)"/>
+                    <polygon points="50,62 52,68 58,70 52,72 50,78 48,72 42,70 48,68" fill="url(#goldGrad)"/>
+                    
+                    <defs>
+                        <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#c5a059" />
+                            <stop offset="40%" stop-color="#f9ebc4" />
+                            <stop offset="60%" stop-color="#b3821a" />
+                            <stop offset="100%" stop-color="#e6c565" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+
+
+            <button class="gold-capsule-btn" id="openInvitation">
+                <span class="btn-icon">✉</span>
+                <span class="btn-text">Buka Undangan</span>
+            </button>
+
+            <!-- Creator Watermark on Cover -->
+            <p class="opening-watermark">
+                Created by IG: <a href="https://instagram.com/raaffdhh" target="_blank" rel="noopener">@raaffdhh</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- =========================================
+         FLOATING ACTION BUTTONS
+    ========================================== -->
+    <audio id="weddingMusic" loop preload="auto">
+        <source src="music/wedding.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="floating-controls">
+        <button class="control-btn" id="musicButton" title="Putar / Hentikan Musik">
+            <span class="disc-icon">♫</span>
+        </button>
+        <button class="control-btn" id="autoscrollButton" title="Auto Scroll (Jalan Otomatis)">
+            <span class="scroll-icon">▼</span>
+        </button>
+    </div>
+
+    <!-- =========================================
+         MAIN CONTENT
+    ========================================== -->
+    <main id="mainContent">
+
+        <!-- 1. HERO SECTION -->
+        <section class="hero" id="home">
+            <div class="hero-overlay"></div>
+
+            <div class="hero-content">
+                <div class="hero-arch-container">
+                    <p class="eyebrow-gold">SAVE THE DATE</p>
+                    <h2 class="hero-title">
+                        <span>Farhan</span>
+                        <small>&</small>
+                        <span>Nawa</span>
+                    </h2>
+                    <p class="hero-date">12 · 12 · 2026</p>
+                    <p class="hero-subtitle">We are getting married</p>
+                </div>
+            </div>
+
+            <div class="scroll-indicator">
+                <div class="mouse"></div>
+                <span>GULIR KE BAWAH</span>
+            </div>
+        </section>
+
+        <!-- 2. QURANIC VERSE SECTION (HALAMAN SURAT AYAT AL-QURAN) -->
+        <section class="quran-section section" id="verse">
+            <div class="arch-card quran-card">
+                <div class="batik-border-frame"></div>
+
+                <!-- Gold Monogram Crest Badge -->
+                <!-- SVG Monogram Crest Badge -->
+                <div class="monogram-badge">
+                    <div class="svg-crest-logo">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M 50 2 L 95 25 L 95 75 L 50 98 L 5 75 L 5 25 Z" fill="none" stroke="url(#goldGrad2)" stroke-width="2.5"/>
+                            <path d="M 50 8 L 88 28 L 88 72 L 50 92 L 12 72 L 12 28 Z" fill="none" stroke="url(#goldGrad2)" stroke-width="1"/>
+                            <text x="38" y="62" font-family="'Cinzel', serif" font-size="34" font-weight="bold" fill="url(#goldGrad2)" text-anchor="middle">F</text>
+                            <text x="62" y="62" font-family="'Cinzel', serif" font-size="34" font-weight="bold" fill="url(#goldGrad2)" text-anchor="middle">N</text>
+                            <defs>
+                                <linearGradient id="goldGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#c5a059" />
+                                    <stop offset="50%" stop-color="#f9ebc4" />
+                                    <stop offset="100%" stop-color="#b3821a" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="arabic-verse" lang="ar">
+                    وَمِن كُلِّ شَيْءٍ خَلَقْنَا زَوْجَيْنِ لَعَلَّكُمْ تَذَكَّرُونَ
+                </div>
+
+                <p class="verse-translation">
+                    "Dan segala sesuatu Kami ciptakan berpasang-pasangan agar kamu mengingat (kebesaran Allah)."
+                </p>
+
+                <p class="verse-citation">(Q.S. Az-Zariyat : 49)</p>
+            </div>
+        </section>
+
+        <!-- 3. COUPLE SECTION (THE BRIDE & THE GROOM) -->
+        <section class="couple-section section" id="couple">
+            <div class="section-heading">
+                <p class="eyebrow-gold">THE COUPLE</p>
+                <h2>Dua Insan,<br><i class="script-font">Satu Ikatan Suci.</i></h2>
+                <div class="golden-line-dec"></div>
+            </div>
+
+            <p class="intro-text">
+                Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri hari
+                bahagia kami:
+            </p>
+
+            <div class="couple-cards-wrapper">
+
+                <!-- THE BRIDE CARD -->
+                <div class="bride-groom-card">
+                    <span class="card-role-title">THE BRIDE</span>
+
+                    <div class="arch-white-card">
+                        <!-- Golden Classic Ornate Frame around photo -->
+                        <div class="classic-gold-frame">
+                            <div class="photo-container">
+                                <img src="images/bride.JPG" alt="Elora Dwi Nawa Indianti" id="brideImg">
+                            </div>
+                        </div>
+
+                        <h3 class="person-full-name">Elora Dwi Nawa Indianti S.M</h3>
+
+                        <p class="parents-detail">
+                            Putri dari pasangan<br>
+                            <strong>Bapak Drs. Suyanto S.E</strong><br>
+                            & <strong>Ibu Indah Suyati S.Pd</strong>
+                        </p>
+
+                        <!-- Instagram Link Button -->
+                        <a href="https://instagram.com" target="_blank" rel="noopener" class="ig-solid-btn">
+                            <span class="ig-icon">@</span>
+                            <span>instagram</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="couple-divider-symbol">
+                    <span>&</span>
+                </div>
+
+                <!-- THE GROOM CARD -->
+                <div class="bride-groom-card">
+                    <span class="card-role-title">THE GROOM</span>
+
+                    <div class="arch-white-card">
+                        <!-- Golden Classic Ornate Frame around photo -->
+                        <div class="classic-gold-frame">
+                            <div class="photo-container">
+                                <img src="images/groom.jpeg" alt="Moch. Farhan Amirullah" id="groomImg">
+                            </div>
+                        </div>
+
+                        <h3 class="person-full-name">Moch. Farhan Amirullah S.T</h3>
+
+                        <p class="parents-detail">
+                            Putra dari pasangan<br>
+                            <strong>Bapak (Nama Bapak)</strong><br>
+                            & <strong>Ibu (Nama Ibu)</strong>
+                        </p>
+
+                        <!-- Instagram Link Button -->
+                        <a href="https://instagram.com" target="_blank" rel="noopener" class="ig-solid-btn">
+                            <span class="ig-icon">@</span>
+                            <span>instagram</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 4. COUNTDOWN SECTION -->
+        <section class="countdown-section section">
+            <div class="section-heading light">
+                <p class="eyebrow-gold">SAVE THE DATE</p>
+                <h2>Menghitung Hari<br><i class="script-font">Menuju Hari Bahagia.</i></h2>
+            </div>
+
+            <div class="countdown">
+                <div class="count-box">
+                    <div class="count-circle">
+                        <strong id="days">00</strong>
+                    </div>
+                    <span>HARI</span>
+                </div>
+
+                <div class="count-box">
+                    <div class="count-circle">
+                        <strong id="hours">00</strong>
+                    </div>
+                    <span>JAM</span>
+                </div>
+
+                <div class="count-box">
+                    <div class="count-circle">
+                        <strong id="minutes">00</strong>
+                    </div>
+                    <span>MENIT</span>
+                </div>
+
+                <div class="count-box">
+                    <div class="count-circle">
+                        <strong id="seconds">00</strong>
+                    </div>
+                    <span>DETIK</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. EVENT SECTION -->
+        <section class="events section" id="event">
+            <div class="section-heading">
+                <p class="eyebrow-gold">AGENDA ACARA</p>
+                <h2>Waktu & Lokasi</h2>
+                <p class="sub-text">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i
+                    berkenan hadir untuk memberikan doa restu.</p>
+            </div>
+
+            <div class="event-grid">
+                <!-- AKAD NIKAH -->
+                <article class="event-card">
+                    <div class="event-badge">AKAD NIKAH</div>
+                    <div class="event-icon">♡</div>
+                    <h3>Sabtu</h3>
+                    <div class="event-date">12 Desember 2026</div>
+                    <div class="event-time">⏰ 08.00 — 10.00 WIB</div>
+                    <div class="divider-gold"></div>
+                    <p class="event-location">
+                        <strong>Gedung Balai Prajurit RM Moedjono Poerbonegoro</strong><br>
+                        Puspenerbal Juanda, Sidoarjo, Jawa Timur
+                    </p>
+                    <a href="https://maps.app.goo.gl/obqYRVa7sUztkxbL9" target="_blank" rel="noopener"
+                        class="gold-outline-btn">
+                        <span>📍 Petunjuk Lokasi (Google Maps)</span>
+                    </a>
+                </article>
+
+                <!-- RESEPSI -->
+                <article class="event-card highlight">
+                    <div class="event-badge">RESEPSI</div>
+                    <div class="event-icon">✦</div>
+                    <h3>Sabtu</h3>
+                    <div class="event-date">12 Desember 2026</div>
+                    <div class="event-time">⏰ 11.00 — 14.00 WIB</div>
+                    <div class="divider-gold"></div>
+                    <p class="event-location">
+                        <strong>Gedung Balai Prajurit RM Moedjono Poerbonegoro</strong><br>
+                        Puspenerbal Juanda, Sidoarjo, Jawa Timur
+                    </p>
+                    <a href="https://maps.app.goo.gl/obqYRVa7sUztkxbL9" target="_blank" rel="noopener"
+                        class="gold-outline-btn">
+                        <span>📍 Petunjuk Lokasi (Google Maps)</span>
+                    </a>
+                </article>
+            </div>
+        </section>
+
+        <!-- 6. STORY TIMELINE -->
+        <section class="story section">
+            <div class="section-heading">
+                <p class="eyebrow-gold">OUR JOURNEY</p>
+                <h2>Kisah Perjalanan<br><i class="script-font">Cinta Kami.</i></h2>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-badge">2022</div>
+                    <div class="timeline-card">
+                        <h3>Awal Pertemuan</h3>
+                        <p>Sebuah pertemuan sederhana yang ternyata menjadi awal dari perjalanan indah kami.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-badge">2023</div>
+                    <div class="timeline-card">
+                        <h3>Makin Dekat</h3>
+                        <p>Obrolan hangat dan rasa saling memahami yang semakin mempererat ikatan rasa.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-badge">2025</div>
+                    <div class="timeline-card">
+                        <h3>Lamaran</h3>
+                        <p>Komitmen bersama keluarga besar untuk melangkah menuju ikatan suci pernikahan.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-badge">2026</div>
+                    <div class="timeline-card">
+                        <h3>Menuju Pelaminan</h3>
+                        <p>Kini kami siap mengikrarkan janji suci dan memulai hidup baru bersama sebagai suami istri.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. GALLERY SECTION -->
+        <section class="gallery section" id="gallery">
+            <div class="section-heading">
+                <p class="eyebrow-gold">GALERI FOTO</p>
+                <h2>Momen Bahagia</h2>
+            </div>
+
+            <div class="gallery-grid">
+                <button class="gallery-item">
+                    <img src="images/gallery-1.JPG" alt="Galeri 1" loading="lazy">
+                    <div class="gallery-overlay"><span>🔍 Perbesar</span></div>
+                </button>
+                <button class="gallery-item">
+                    <img src="images/gallery-2.JPG" alt="Galeri 2" loading="lazy">
+                    <div class="gallery-overlay"><span>🔍 Perbesar</span></div>
+                </button>
+                <button class="gallery-item">
+                    <img src="images/gallery-3.JPG" alt="Galeri 3" loading="lazy">
+                    <div class="gallery-overlay"><span>🔍 Perbesar</span></div>
+                </button>
+                <button class="gallery-item">
+                    <img src="images/gallery-4.JPG" alt="Galeri 4" loading="lazy">
+                    <div class="gallery-overlay"><span>🔍 Perbesar</span></div>
+                </button>
+                <button class="gallery-item">
+                    <img src="images/gallery-5.png" alt="Galeri 5" loading="lazy">
+                    <div class="gallery-overlay"><span>🔍 Perbesar</span></div>
+                </button>
+                <button class="gallery-item">
+                    <img src="images/gallery-6.JPG" alt="Galeri 6" loading="lazy">
+                    <div class="gallery-overlay"><span>🔍 Perbesar</span></div>
+                </button>
+            </div>
+        </section>
+
+        <!-- LIGHTBOX MODAL -->
+        <div class="lightbox" id="lightbox">
+            <button class="close-lightbox" id="closeLightbox">×</button>
+            <img id="lightboxImage" src="" alt="Perbesar Gambar">
+        </div>
+
+        <!-- 8. RSVP & WISHES SECTION (KONFIRMASI KEHADIRAN) -->
+        <section class="rsvp section" id="rsvp">
+            <div class="section-heading">
+                <p class="eyebrow-gold">KEHADIRAN & UCAPAN</p>
+                <h2>Buku Tamu</h2>
+            </div>
+
+            <div class="rsvp-card-container">
+                <form class="rsvp-form" id="rsvpForm">
+                    <div class="form-group">
+                        <label for="guestName">Nama Lengkap Anda</label>
+                        <input type="text" id="guestName" placeholder="Tuliskan nama Anda di sini..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="attendance">Konfirmasi Kehadiran</label>
+                        <select id="attendance" required>
+                            <option value="">-- Pilih Konfirmasi Kehadiran --</option>
+                            <option value="Hadir">Saya akan hadir</option>
+                            <option value="Tidak hadir">Maaf, saya tidak dapat hadir</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="guestMessage">Ucapan & Doa Restu</label>
+                        <textarea id="guestMessage" placeholder="Tuliskan ucapan dan doa terbaik untuk mempelai..."
+                            rows="4"></textarea>
+                    </div>
+
+                    <button type="submit" class="gold-capsule-btn full-width">
+                        <span class="btn-icon">💬</span>
+                        <span class="btn-text">Kirim Konfirmasi via WhatsApp</span>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- 9. WEDDING GIFT SECTION -->
+        <section class="gift section">
+            <div class="section-heading light">
+                <p class="eyebrow-gold">HADIAH DIGITAL</p>
+                <h2>Tanda Kasih</h2>
+                <p class="gift-subtitle">Doa restu Anda merupakan hadiah terindah bagi kami. Namun jika ingin memberikan
+                    tanda kasih, dapat disalurkan melalui:</p>
+            </div>
+
+            <div class="bank-card-wrapper">
+                <div class="bank-card">
+                    <div class="bank-chip"></div>
+                    <div class="bank-header">
+                        <span class="bank-name">BANK BCA</span>
+                    </div>
+
+                    <div class="account-number-box">
+                        <strong id="accountNumber">1234567890</strong>
+                    </div>
+
+                    <p class="account-holder">a.n. Moch Farhan Amirullah</p>
+
+                    <button class="gold-outline-btn light-btn" id="copyAccount">
+                        📋 Salin Nomor Rekening
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer>
+            <p class="eyebrow-gold">TERIMA KASIH</p>
+            <h2 class="footer-names">Farhan <span>&</span> Nawa</h2>
+            <p class="footer-msg">Merupakan suatu kebahagiaan bagi kami dapat berbagi momen indah ini bersama Anda.</p>
+            <div class="golden-line-dec"></div>
+
+            <!-- Creator Watermark Badge -->
+            <div class="creator-watermark">
+                <a href="https://instagram.com/raaffdhh" target="_blank" rel="noopener" class="watermark-link">
+                    <span class="heart-icon">♡</span>
+                    <span>Created by IG :</span>
+                    <strong>@raaffdhh</strong>
+                </a>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- =========================================
+         BOTTOM NAVIGATION
+    ========================================== -->
+    <nav class="bottom-nav">
+        <a href="#home" class="nav-item active">
+            <span class="nav-icon">⌂</span>
+            <span class="nav-label">Home</span>
+        </a>
+        <a href="#verse" class="nav-item">
+            <span class="nav-icon">📖</span>
+            <span class="nav-label">Ayat</span>
+        </a>
+        <a href="#couple" class="nav-item">
+            <span class="nav-icon">♡</span>
+            <span class="nav-label">Mempelai</span>
+        </a>
+        <a href="#event" class="nav-item">
+            <span class="nav-icon">📅</span>
+            <span class="nav-label">Acara</span>
+        </a>
+        <a href="#gallery" class="nav-item">
+            <span class="nav-icon">📷</span>
+            <span class="nav-label">Galeri</span>
+        </a>
+        <a href="#rsvp" class="nav-item">
+            <span class="nav-icon">✉</span>
+            <span class="nav-label">Kehadiran</span>
+        </a>
+    </nav>
+
+    <!-- JAVASCRIPT -->
+    <script src="js/script.js"></script>
+</body>
+
+</html>
