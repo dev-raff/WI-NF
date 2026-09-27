@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         function scrollLoop() {
             if (!isAutoScrolling) return;
-            currentScrollY += 0.6; // Buttery smooth fractional speed
+            currentScrollY += Math.max(0.6, window.innerHeight * 0.0008); // Responsive speed for TV & Mobile
             window.scrollTo(0, currentScrollY);
 
             // User manually scrolled -> update tracker
@@ -326,6 +326,22 @@ document.addEventListener("DOMContentLoaded", () => {
         window.addEventListener("resize", () => {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
+            
+            // Adjust density dynamically
+            let newPetalsCount = Math.min(Math.floor((width * height) / 25000), 150);
+            let newFirefliesCount = Math.min(Math.floor((width * height) / 20000), 200);
+            
+            if (newPetalsCount > petals.length) {
+                petals.push(...Array.from({ length: newPetalsCount - petals.length }, () => new Petal()));
+            } else {
+                petals.splice(newPetalsCount);
+            }
+            
+            if (newFirefliesCount > fireflies.length) {
+                fireflies.push(...Array.from({ length: newFirefliesCount - fireflies.length }, () => new Firefly()));
+            } else {
+                fireflies.splice(newFirefliesCount);
+            }
         });
 
         const petalColors = [
@@ -407,22 +423,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
             draw() {
                 ctx.beginPath();
-                // Glowing radial gradient
-                const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * 3);
-                gradient.addColorStop(0, `rgba(255, 230, 150, ${this.opacity})`);
-                gradient.addColorStop(1, `rgba(255, 230, 150, 0)`);
-                
-                ctx.fillStyle = gradient;
-                ctx.arc(this.x, this.y, this.size * 3, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 230, 150, ${this.opacity})`;
+                // Solid sharp circle instead of blurred radial gradient
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
             }
         }
 
-        const petalsCount = window.innerWidth < 600 ? 25 : 45;
-        const firefliesCount = window.innerWidth < 600 ? 30 : 60;
+        // Responsive particle counts based on screen size (Mobile to TV)
+        let petalsCount = Math.floor((width * height) / 25000); 
+        let firefliesCount = Math.floor((width * height) / 20000);
         
-        const petals = Array.from({ length: petalsCount }, () => new Petal());
-        const fireflies = Array.from({ length: firefliesCount }, () => new Firefly());
+        // Cap maximums for performance on 4K TVs
+        petalsCount = Math.min(petalsCount, 150);
+        firefliesCount = Math.min(firefliesCount, 200);
+        
+        let petals = Array.from({ length: petalsCount }, () => new Petal());
+        let fireflies = Array.from({ length: firefliesCount }, () => new Firefly());
 
         function animateCanvas() {
             ctx.clearRect(0, 0, width, height);
