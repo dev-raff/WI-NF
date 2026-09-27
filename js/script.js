@@ -43,6 +43,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     console.log("Autoplay blocked by browser policy.");
                 });
             }
+
+            // Start auto-scroll automatically after a short delay
+            setTimeout(() => {
+                if (typeof startAutoScroll === "function") {
+                    startAutoScroll();
+                }
+            }, 1500);
         });
     }
 
@@ -62,37 +69,78 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /* =========================================
-       3. AUTO SCROLL FEATURE
+       3. AUTO SCROLL FEATURE (BUTTERY SMOOTH)
     ========================================= */
     const autoscrollButton = document.getElementById("autoscrollButton");
-    let autoScrollInterval = null;
+    let autoScrollRaf = null;
     let isAutoScrolling = false;
+    let currentScrollY = 0;
+
+    window.startAutoScroll = function() {
+        if (isAutoScrolling) return;
+        isAutoScrolling = true;
+        currentScrollY = window.scrollY;
+        
+        if (autoscrollButton) {
+            autoscrollButton.classList.add("active");
+            autoscrollButton.style.background = "var(--gold-primary)";
+            autoscrollButton.style.color = "var(--burgundy-dark)";
+        }
+
+        function scrollLoop() {
+            if (!isAutoScrolling) return;
+            currentScrollY += 0.6; // Buttery smooth fractional speed
+            window.scrollTo(0, currentScrollY);
+
+            // User manually scrolled -> update tracker
+            if (Math.abs(window.scrollY - currentScrollY) > 2) {
+                currentScrollY = window.scrollY;
+            }
+
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 10) {
+                stopAutoScroll();
+            } else {
+                autoScrollRaf = requestAnimationFrame(scrollLoop);
+            }
+        }
+        autoScrollRaf = requestAnimationFrame(scrollLoop);
+    };
+
+    window.stopAutoScroll = function() {
+        isAutoScrolling = false;
+        if (autoScrollRaf) cancelAnimationFrame(autoScrollRaf);
+        if (autoscrollButton) {
+            autoscrollButton.style.background = "";
+            autoscrollButton.style.color = "";
+            autoscrollButton.classList.remove("active");
+        }
+    };
 
     if (autoscrollButton) {
         autoscrollButton.addEventListener("click", () => {
             if (!isAutoScrolling) {
-                isAutoScrolling = true;
-                autoscrollButton.classList.add("active");
-                autoscrollButton.style.background = "var(--gold-primary)";
-                autoscrollButton.style.color = "var(--burgundy-dark)";
-                
-                autoScrollInterval = setInterval(() => {
-                    window.scrollBy({ top: 1.5, behavior: 'smooth' });
-                    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 10) {
-                        clearInterval(autoScrollInterval);
-                        isAutoScrolling = false;
-                        autoscrollButton.style.background = "";
-                        autoscrollButton.style.color = "";
-                    }
-                }, 30);
+                startAutoScroll();
             } else {
-                clearInterval(autoScrollInterval);
-                isAutoScrolling = false;
-                autoscrollButton.style.background = "";
-                autoscrollButton.style.color = "";
+                stopAutoScroll();
             }
         });
     }
+
+    /* =========================================
+       3.5 INTERACTIVE 3D PARALLAX FLOWERS
+    ========================================= */
+    document.addEventListener("mousemove", (e) => {
+        const flowers = document.querySelectorAll(".interactive-flower");
+        const x = (e.clientX / window.innerWidth - 0.5) * 2; // -1 to 1
+        const y = (e.clientY / window.innerHeight - 0.5) * 2; // -1 to 1
+
+        flowers.forEach(flower => {
+            const depth = flower.getAttribute("data-depth") || 20;
+            const moveX = x * depth;
+            const moveY = y * depth;
+            flower.style.transform = `translate3d(${moveX}px, ${moveY}px, 0) rotate(${x * 10}deg)`;
+        });
+    });
 
     /* =========================================
        4. COUNTDOWN TIMER
@@ -242,35 +290,29 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     /* =========================================
-       9. INTERACTION SCROLL REVEAL ANIMATIONS
+       9. INTERACTION SCROLL REVEAL ANIMATIONS (3D)
     ========================================= */
-    const revealElements = document.querySelectorAll(
-        ".quran-card, .bride-groom-card, .event-card, .timeline-item, .gallery-item, .bank-card, .section-heading"
-    );
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("revealed");
-            }
+    const revealTargets = document.querySelectorAll('.reveal-on-scroll, .reveal-left, .reveal-right');
+    if (revealTargets.length > 0 && 'IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                } else {
+                    // Remove class when out of view so it repeats when scrolling again!
+                    entry.target.classList.remove('is-visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
         });
-    }, { threshold: 0.05 });
 
-    revealElements.forEach(el => {
-        el.style.opacity = "0";
-        el.style.transform = "translateY(20px)";
-        el.style.transition = "opacity 0.6s ease-out, transform 0.6s ease-out";
-        observer.observe(el);
-    });
-
-    const style = document.createElement("style");
-    style.textContent = `
-        .revealed {
-            opacity: 1 !important;
-            transform: translateY(0) !important;
-        }
-    `;
-    document.head.appendChild(style);
+        revealTargets.forEach(el => revealObserver.observe(el));
+    } else {
+        // Fallback for older browsers
+        revealTargets.forEach(el => el.classList.add('is-visible'));
+    }
 
     /* =========================================
        10. FALLING ROSE PETALS CANVAS ANIMATION
@@ -333,18 +375,74 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-        const petalsCount = window.innerWidth < 600 ? 25 : 45;
-        const petals = Array.from({ length: petalsCount }, () => new Petal());
+        class Firefly {
+            constructor() {
+                this.reset(true);
+            }
 
-        function animatePetals() {
+            reset(initial = false) {
+                this.x = Math.random() * width;
+                this.y = initial ? Math.random() * height : height + 20;
+                this.size = Math.random() * 2 + 1;
+                this.speedY = -(Math.random() * 0.8 + 0.3); // float up
+                this.speedX = Math.random() * 1 - 0.5;
+                this.opacity = Math.random() * 0.5 + 0.3;
+                this.pulseSpeed = Math.random() * 0.05 + 0.02;
+                this.pulseDir = 1;
+            }
+
+            update() {
+                this.y += this.speedY;
+                this.x += Math.sin(this.y * 0.02) * 0.5 + this.speedX;
+                
+                // Pulsing glowing effect
+                this.opacity += this.pulseSpeed * this.pulseDir;
+                if (this.opacity > 0.9) this.pulseDir = -1;
+                if (this.opacity < 0.2) this.pulseDir = 1;
+
+                if (this.y < -20) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                // Glowing radial gradient
+                const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * 3);
+                gradient.addColorStop(0, `rgba(255, 230, 150, ${this.opacity})`);
+                gradient.addColorStop(1, `rgba(255, 230, 150, 0)`);
+                
+                ctx.fillStyle = gradient;
+                ctx.arc(this.x, this.y, this.size * 3, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        const petalsCount = window.innerWidth < 600 ? 25 : 45;
+        const firefliesCount = window.innerWidth < 600 ? 30 : 60;
+        
+        const petals = Array.from({ length: petalsCount }, () => new Petal());
+        const fireflies = Array.from({ length: firefliesCount }, () => new Firefly());
+
+        function animateCanvas() {
             ctx.clearRect(0, 0, width, height);
+            
+            // Draw Fireflies (Glowing Dust)
+            fireflies.forEach(firefly => {
+                firefly.update();
+                firefly.draw();
+            });
+
+            // Draw Petals
             petals.forEach(petal => {
                 petal.update();
                 petal.draw();
             });
-            requestAnimationFrame(animatePetals);
+            
+            requestAnimationFrame(animateCanvas);
         }
 
-        animatePetals();
+        animateCanvas();
     }
+
 });

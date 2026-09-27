@@ -14,6 +14,9 @@
         rel="stylesheet">
 
     <!-- CSS -->
+    <!-- Bootstrap 5 CSS (Added per user request) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -104,6 +107,40 @@
     ========================================== -->
     <main id="mainContent">
 
+        <!-- BIRDS CONTAINER -->
+        <div class="birds-container">
+            <div class="bird bird-1">
+                <svg viewBox="0 0 50 30" width="35" height="25" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 0,15 C 10,5 20,5 25,15 C 30,5 40,5 50,15 C 35,25 25,25 25,20 C 25,25 15,25 0,15 Z" fill="#d4af37" class="bird-wing"/>
+                </svg>
+            </div>
+            <div class="bird bird-2">
+                <svg viewBox="0 0 50 30" width="25" height="15" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 0,15 C 10,5 20,5 25,15 C 30,5 40,5 50,15 C 35,25 25,25 25,20 C 25,25 15,25 0,15 Z" fill="#d4af37" class="bird-wing"/>
+                </svg>
+            </div>
+        </div>
+
+        <!-- INTERACTIVE 3D FLOWERS -->
+        <div class="interactive-flower flower-top-left" data-depth="25">
+            <svg viewBox="0 0 100 100" width="140" height="140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 50 Q70 10 90 50 Q70 90 50 50 Z" fill="#d4af37" opacity="0.6"/>
+                <path d="M50 50 Q10 30 50 10 Q90 30 50 50 Z" fill="#c5a059" opacity="0.7"/>
+                <path d="M50 50 Q10 70 50 90 Q90 70 50 50 Z" fill="#e6c565" opacity="0.8"/>
+                <path d="M50 50 Q30 10 10 50 Q30 90 50 50 Z" fill="#b3821a" opacity="0.7"/>
+                <circle cx="50" cy="50" r="8" fill="#fff8dc"/>
+            </svg>
+        </div>
+        <div class="interactive-flower flower-bottom-right" data-depth="-30">
+            <svg viewBox="0 0 100 100" width="160" height="160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 50 Q70 10 90 50 Q70 90 50 50 Z" fill="#d4af37" opacity="0.6"/>
+                <path d="M50 50 Q10 30 50 10 Q90 30 50 50 Z" fill="#c5a059" opacity="0.7"/>
+                <path d="M50 50 Q10 70 50 90 Q90 70 50 50 Z" fill="#e6c565" opacity="0.8"/>
+                <path d="M50 50 Q30 10 10 50 Q30 90 50 50 Z" fill="#b3821a" opacity="0.7"/>
+                <circle cx="50" cy="50" r="8" fill="#fff8dc"/>
+            </svg>
+        </div>
+
         <!-- 1. HERO SECTION -->
         <section class="hero" id="home">
             <div class="hero-overlay"></div>
@@ -166,7 +203,7 @@
 
         <!-- 3. COUPLE SECTION (THE BRIDE & THE GROOM) -->
         <section class="couple-section section" id="couple">
-            <div class="section-heading">
+            <div class="section-heading reveal-on-scroll">
                 <p class="eyebrow-gold">THE COUPLE</p>
                 <h2>Dua Insan,<br><i class="script-font">Satu Ikatan Suci.</i></h2>
                 <div class="golden-line-dec"></div>
@@ -180,12 +217,28 @@
             <div class="couple-cards-wrapper">
 
                 <!-- THE BRIDE CARD -->
-                <div class="bride-groom-card">
+                <div class="bride-groom-card reveal-left">
                     <span class="card-role-title">THE BRIDE</span>
 
                     <div class="arch-white-card">
                         <!-- Golden Classic Ornate Frame around photo -->
-                        <div class="classic-gold-frame">
+                        <div class="classic-gold-frame position-relative">
+                            <!-- Swaying Flowers on Frame using Bootstrap 5 utility classes -->
+                            <svg viewBox="0 0 64 64" class="position-absolute top-0 start-100 translate-middle swaying-flower flower-decor-tr" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M32 4 C32 4 44 20 32 32 C20 20 32 4 32 4 Z" fill="#d4af37"/>
+                                <path d="M32 32 C32 32 54 20 62 32 C54 44 32 32 32 32 Z" fill="#c5a059"/>
+                                <path d="M32 32 C32 32 10 20 2 32 C10 44 32 32 32 32 Z" fill="#c5a059"/>
+                                <path d="M32 32 C32 32 44 56 32 62 C20 56 32 32 32 32 Z" fill="#d4af37"/>
+                                <circle cx="32" cy="32" r="5" fill="#fff8dc"/>
+                            </svg>
+                            <svg viewBox="0 0 64 64" class="position-absolute top-100 start-0 translate-middle swaying-flower flower-decor-bl" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M32 4 C32 4 44 20 32 32 C20 20 32 4 32 4 Z" fill="#d4af37"/>
+                                <path d="M32 32 C32 32 54 20 62 32 C54 44 32 32 32 32 Z" fill="#c5a059"/>
+                                <path d="M32 32 C32 32 10 20 2 32 C10 44 32 32 32 32 Z" fill="#c5a059"/>
+                                <path d="M32 32 C32 32 44 56 32 62 C20 56 32 32 32 32 Z" fill="#d4af37"/>
+                                <circle cx="32" cy="32" r="5" fill="#fff8dc"/>
+                            </svg>
+
                             <div class="photo-container">
                                 <img src="images/bride.JPG" alt="Elora Dwi Nawa Indianti" id="brideImg">
                             </div>
@@ -200,9 +253,9 @@
                         </p>
 
                         <!-- Instagram Link Button -->
-                        <a href="https://instagram.com" target="_blank" rel="noopener" class="ig-solid-btn">
+                        <a href="https://instagram.com/nawaelora" target="_blank" rel="noopener" class="ig-solid-btn">
                             <span class="ig-icon">@</span>
-                            <span>instagram</span>
+                            <span>nawaelora</span>
                         </a>
                     </div>
                 </div>
@@ -212,12 +265,28 @@
                 </div>
 
                 <!-- THE GROOM CARD -->
-                <div class="bride-groom-card">
+                <div class="bride-groom-card reveal-right">
                     <span class="card-role-title">THE GROOM</span>
 
                     <div class="arch-white-card">
                         <!-- Golden Classic Ornate Frame around photo -->
-                        <div class="classic-gold-frame">
+                        <div class="classic-gold-frame position-relative">
+                            <!-- Swaying Flowers on Frame using Bootstrap 5 utility classes -->
+                            <svg viewBox="0 0 64 64" class="position-absolute top-0 start-0 translate-middle swaying-flower flower-decor-tl" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M32 4 C32 4 44 20 32 32 C20 20 32 4 32 4 Z" fill="#d4af37"/>
+                                <path d="M32 32 C32 32 54 20 62 32 C54 44 32 32 32 32 Z" fill="#c5a059"/>
+                                <path d="M32 32 C32 32 10 20 2 32 C10 44 32 32 32 32 Z" fill="#c5a059"/>
+                                <path d="M32 32 C32 32 44 56 32 62 C20 56 32 32 32 32 Z" fill="#d4af37"/>
+                                <circle cx="32" cy="32" r="5" fill="#fff8dc"/>
+                            </svg>
+                            <svg viewBox="0 0 64 64" class="position-absolute top-100 start-100 translate-middle swaying-flower flower-decor-br" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M32 4 C32 4 44 20 32 32 C20 20 32 4 32 4 Z" fill="#d4af37"/>
+                                <path d="M32 32 C32 32 54 20 62 32 C54 44 32 32 32 32 Z" fill="#c5a059"/>
+                                <path d="M32 32 C32 32 10 20 2 32 C10 44 32 32 32 32 Z" fill="#c5a059"/>
+                                <path d="M32 32 C32 32 44 56 32 62 C20 56 32 32 32 32 Z" fill="#d4af37"/>
+                                <circle cx="32" cy="32" r="5" fill="#fff8dc"/>
+                            </svg>
+
                             <div class="photo-container">
                                 <img src="images/groom.jpeg" alt="Moch. Farhan Amirullah" id="groomImg">
                             </div>
@@ -232,9 +301,9 @@
                         </p>
 
                         <!-- Instagram Link Button -->
-                        <a href="https://instagram.com" target="_blank" rel="noopener" class="ig-solid-btn">
+                        <a href="https://instagram.com/farhan_aje" target="_blank" rel="noopener" class="ig-solid-btn">
                             <span class="ig-icon">@</span>
-                            <span>instagram</span>
+                            <span>farhan_aje</span>
                         </a>
                     </div>
                 </div>
@@ -282,7 +351,7 @@
 
         <!-- 5. EVENT SECTION -->
         <section class="events section" id="event">
-            <div class="section-heading">
+            <div class="section-heading reveal-on-scroll">
                 <p class="eyebrow-gold">AGENDA ACARA</p>
                 <h2>Waktu & Lokasi</h2>
                 <p class="sub-text">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i
@@ -291,7 +360,7 @@
 
             <div class="event-grid">
                 <!-- AKAD NIKAH -->
-                <article class="event-card">
+                <article class="event-card reveal-left">
                     <div class="event-badge">AKAD NIKAH</div>
                     <div class="event-icon">♡</div>
                     <h3>Sabtu</h3>
@@ -309,7 +378,7 @@
                 </article>
 
                 <!-- RESEPSI -->
-                <article class="event-card highlight">
+                <article class="event-card highlight reveal-right">
                     <div class="event-badge">RESEPSI</div>
                     <div class="event-icon">✦</div>
                     <h3>Sabtu</h3>
@@ -330,13 +399,13 @@
 
         <!-- 6. STORY TIMELINE -->
         <section class="story section">
-            <div class="section-heading">
+            <div class="section-heading reveal-on-scroll">
                 <p class="eyebrow-gold">OUR JOURNEY</p>
                 <h2>Kisah Perjalanan<br><i class="script-font">Cinta Kami.</i></h2>
             </div>
 
             <div class="timeline">
-                <div class="timeline-item">
+                <div class="timeline-item reveal-left">
                     <div class="timeline-badge">2022</div>
                     <div class="timeline-card">
                         <h3>Awal Pertemuan</h3>
@@ -344,7 +413,7 @@
                     </div>
                 </div>
 
-                <div class="timeline-item">
+                <div class="timeline-item reveal-right">
                     <div class="timeline-badge">2023</div>
                     <div class="timeline-card">
                         <h3>Makin Dekat</h3>
@@ -352,7 +421,7 @@
                     </div>
                 </div>
 
-                <div class="timeline-item">
+                <div class="timeline-item reveal-left">
                     <div class="timeline-badge">2025</div>
                     <div class="timeline-card">
                         <h3>Lamaran</h3>
@@ -360,7 +429,7 @@
                     </div>
                 </div>
 
-                <div class="timeline-item">
+                <div class="timeline-item reveal-right">
                     <div class="timeline-badge">2026</div>
                     <div class="timeline-card">
                         <h3>Menuju Pelaminan</h3>
@@ -373,33 +442,33 @@
 
         <!-- 7. GALLERY SECTION -->
         <section class="gallery section" id="gallery">
-            <div class="section-heading">
+            <div class="section-heading reveal-on-scroll">
                 <p class="eyebrow-gold">GALERI FOTO</p>
                 <h2>Momen Bahagia</h2>
             </div>
 
             <div class="gallery-grid">
-                <button class="gallery-item">
+                <button class="gallery-item reveal-on-scroll">
                     <img src="images/gallery-1.JPG" alt="Galeri 1" loading="lazy">
                     <div class="gallery-overlay"><span>🔍 Perbesar</span></div>
                 </button>
-                <button class="gallery-item">
+                <button class="gallery-item reveal-on-scroll">
                     <img src="images/gallery-2.JPG" alt="Galeri 2" loading="lazy">
                     <div class="gallery-overlay"><span>🔍 Perbesar</span></div>
                 </button>
-                <button class="gallery-item">
+                <button class="gallery-item reveal-on-scroll">
                     <img src="images/gallery-3.JPG" alt="Galeri 3" loading="lazy">
                     <div class="gallery-overlay"><span>🔍 Perbesar</span></div>
                 </button>
-                <button class="gallery-item">
+                <button class="gallery-item reveal-on-scroll">
                     <img src="images/gallery-4.JPG" alt="Galeri 4" loading="lazy">
                     <div class="gallery-overlay"><span>🔍 Perbesar</span></div>
                 </button>
-                <button class="gallery-item">
+                <button class="gallery-item reveal-on-scroll">
                     <img src="images/gallery-5.png" alt="Galeri 5" loading="lazy">
                     <div class="gallery-overlay"><span>🔍 Perbesar</span></div>
                 </button>
-                <button class="gallery-item">
+                <button class="gallery-item reveal-on-scroll">
                     <img src="images/gallery-6.JPG" alt="Galeri 6" loading="lazy">
                     <div class="gallery-overlay"><span>🔍 Perbesar</span></div>
                 </button>
@@ -414,12 +483,12 @@
 
         <!-- 8. RSVP & WISHES SECTION (KONFIRMASI KEHADIRAN) -->
         <section class="rsvp section" id="rsvp">
-            <div class="section-heading">
+            <div class="section-heading reveal-on-scroll">
                 <p class="eyebrow-gold">KEHADIRAN & UCAPAN</p>
                 <h2>Buku Tamu</h2>
             </div>
 
-            <div class="rsvp-card-container">
+            <div class="rsvp-card-container reveal-on-scroll">
                 <form class="rsvp-form" id="rsvpForm">
                     <div class="form-group">
                         <label for="guestName">Nama Lengkap Anda</label>
@@ -451,14 +520,14 @@
 
         <!-- 9. WEDDING GIFT SECTION -->
         <section class="gift section">
-            <div class="section-heading light">
+            <div class="section-heading light reveal-on-scroll">
                 <p class="eyebrow-gold">HADIAH DIGITAL</p>
                 <h2>Tanda Kasih</h2>
                 <p class="gift-subtitle">Doa restu Anda merupakan hadiah terindah bagi kami. Namun jika ingin memberikan
                     tanda kasih, dapat disalurkan melalui:</p>
             </div>
 
-            <div class="bank-card-wrapper">
+            <div class="bank-card-wrapper reveal-on-scroll">
                 <div class="bank-card">
                     <div class="bank-chip"></div>
                     <div class="bank-header">
