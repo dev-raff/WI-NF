@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (typeof startAutoScroll === "function") {
                     startAutoScroll();
                 }
-            }, 1500);
+            }, 5000);
         });
     }
 
@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
     /* =========================================
        4. COUNTDOWN TIMER
     ========================================= */
-    const weddingDate = new Date("December 12, 2026 08:00:00").getTime();
+    const weddingDate = new Date("November 29, 2026 06:00:00").getTime();
 
     function updateCountdown() {
         const now = new Date().getTime();
